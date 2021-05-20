@@ -5,6 +5,7 @@ const cors = require('cors');
 //const corsMW = require('./app/middlewares/corsMW');
 const log = require('./app/middlewares/log');
 const expressSanitizer = require('express-sanitizer');
+const session = require('express-session');
 const express = require('express');
 const router = require('./app/router');
 //je crée mon router
@@ -27,6 +28,16 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true})); 
 //Une ptite sécurité supplémentaire avec ce module qui filtre, comme Joi, nos entrés, en enlevant tout tag html et balise
 app.use(expressSanitizer()); 
+// mise en place du système de sessions pour stocker les infos utilisateur
+app.use(
+session({
+resave:true,
+saveUninitialized: true,
+secret: process.env.SECRET,
+cookie: {
+  secure:false,
+  maxAge: 1000*60*60*5,
+}}))
 // Je require le middleware pour dire à express d'être plus permissif sur l'origine des requête
 app.use(cors({ 
   optionsSuccessStatus: 200,//pour transmettre un statue 200 pour d'ancien navigateur
