@@ -13,7 +13,12 @@ const { Pool, Connection } = require('pg');
 // PGPASSWORD pour le mot de passe
 // PGDATABASE pour la base de données
 
-const db = new Pool();
+const db = new Pool({
+    connectionString:process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized:false,
+    }
+});
 
 // maintenant, on n'a plus un seul connecteur (comme avec Client) mais un pool de connecteur (avec Pool)
 module.exports = db;
