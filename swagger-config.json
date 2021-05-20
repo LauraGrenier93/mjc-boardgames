@@ -1,0 +1,15 @@
+{
+    "swaggerDefinition": {
+        "info": {
+            "description": "Bienvenue sur l'API du site des Gardiens de la légende",
+            "title": "Les gardiens de la légende",
+            "version": "1.0.0"
+        },
+        "basePath": "/",
+        "produces": [
+            "application/json"
+        ],
+        "schemes": ["http"]
+    },
+    "files": ["./app/router.js"]
+}

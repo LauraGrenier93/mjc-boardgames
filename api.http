@@ -1,0 +1,210 @@
+
+@protocol= http
+@domainname= localhost
+@port= 3000
+@path=v1
+@baseUrl = {{protocol}}://{{domainname}}:{{port}}/{{path}}
+
+### Route GET /articles
+
+GET {{baseUrl}}/articles
+
+### Route GET /articles/:id
+GET {{baseUrl}}/articles/1
+
+### Route POST /articles
+POST {{baseUrl}}/articles
+Content-Type: application/json
+
+{
+    "title": "test title 2",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum odio est, at gravida urna malesuada sit amet. Donec ut ligula in enim mattis convallis. Sed ut sapien et lorem ultricies cursus ac sagittis ex. Maecenas sed lorem nec risus placerat vehicula. Maecenas sit amet lectus eleifend, gravida diam et, tempor mi. Donec porta tortor in sapien viverra tincidunt. Vivamus nisi lacus, vestibulum eu dignissim mollis, tempor commodo felis. Donec venenatis ut diam in consectetur. Integer a dolor a arcu egestas vestibulum. Aenean porttitor diam quis leo ornare elementum. Pellentesque sed erat aliquet, pellentesque risus gravida, posuere quam. Vivamus eget urna quis dui ultrices molestie.",
+    "authorId": "1",
+    "tagId": "1"
+}
+
+### Route PATCH /articles/18
+PATCH {{baseUrl}}/articles/18
+Content-Type: application/json
+
+{
+    "title": "test title 2"
+}
+
+### Route DELETE /articles/18
+DELETE {{baseUrl}}/articles/18
+
+### Route GET /users => tous les users
+
+GET {{baseUrl}}/user
+
+### Route GET /user/:id => user avec un id précis
+
+GET {{baseUrl}}/user/1
+
+### Ajout d'un user (sans vérif ni rien pour l'instant..)
+
+
+POST {{baseUrl}}/user
+Content-Type: application/json
+
+{"firstName":"arthur","lastName":"Leroy","pseudo":"king","emailAddress":"king@samajesty.fr","password":"c'est moche un password en clair :)", "inscription":"2020-03-18", "avatar":"/lien/vers/mon/image.jpg"}
+
+
+### Modification d'un user (sans vérif ni rien pour l'instant..
+
+PATCH {{baseUrl}}/user/15
+Content-Type: application/json
+
+{"firstName":"impérator","lastName":"Neron","pseudo":"The king","emailAddress":"theKing@samajesty.fr","password":"c'est moche un password en clair :)", "inscription":"2020-03-18", "avatar":"/lien/vers/mon/autre/image.jpg"}
+
+### Test modification d'un user sans l'intégralité des infos.
+
+PATCH {{baseUrl}}/user/17
+Content-Type: application/json
+
+{"firstName":"Imperator Nero Claudius Caesar Augustus Germanicus"}
+
+### Suppression d'un user
+
+DELETE {{baseUrl}}/user/13
+
+### Route connexion en GET pour avoir le form login => ouvrir dans navigateur...
+
+GET {{baseUrl}}/connexion
+
+### Route GET /jeux
+GET {{baseUrl}}/jeux
+
+### Route GET /jeux/:id
+GET {{baseUrl}}/jeux/2
+
+### Route POST /jeux
+POST {{baseUrl}}/jeux
+Content-Type: application/json
+
+{
+    "title": "test 2",
+    "minPlayer": "2",
+    "maxPlayer": "5",
+    "minAge": "10",
+    "duration": "50",
+    "quantity": "1",
+    "creator": "test test",
+    "editor": "TEST",
+    "description": "Integer quis convallis purus. Praesent mauris justo, pellentesque a nisl nec, molestie posuere mi. Nulla ipsum ante, suscipit non ligula in, efficitur dignissim odio. Etiam lectus mi, dapibus non purus at, posuere vulputate sapien. Integer diam velit, placerat vitae elit ac, pellentesque suscipit nulla. Sed convallis id massa vitae pretium. Nunc sit amet dapibus nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus dignissim, diam quis fringilla porttitor, lorem elit rhoncus neque, et convallis tortor lorem eu turpis. Phasellus ac rhoncus massa. Fusce suscipit metus et nunc sagittis hendrerit. ",
+    "year": "2021",
+    "typeId": "1",
+    "gameCategories": "Jeux de Rôle"
+}
+
+### Route PATCH /jeux/:id
+PATCH {{baseUrl}}/jeux/6
+Content-Type: application/json
+
+{
+    "title": "test 3",
+    "gameCategories": "Jeux de Plateaux"
+}
+
+
+################################# Gestion des FORMULAIRE #######################
+
+
+### Route POST pour se connecter qui recoit des infos de connexion = pseudo et password
+POST {{baseUrl}}/connexion
+
+
+{"pseudo":"king_kong", "password":"Effe0EegfDFGG!"}
+
+
+###
+
+POST {{baseUrl}}/connexion
+Content-Type: application/json
+Authorization: Bearer xxx
+
+{"pseudo":"Tonton", "password":"123!!AAaa"}
+
+
+###
+POST {{baseUrl}}/connexion
+#Content-Type: application/json
+#Authorization: Bearer xxx
+
+{"pseudo":"Daisy", "password":"123!!AAaa"}
+
+
+### Route pour se déconnecter du login => request.session.user = false
+
+GET {{baseUrl}}/deconnexion
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI0LCJqdGkiOiJUb25ueV8yNTE5OTgiLCJpYXQiOjE2MTU0ODEwMzcsImV4cCI6MTYxNTQ4MTkzN30.WniQcNJcAhK1etwGa2y_2Pffw2jRFqMxn_7vmuytitk
+
+
+
+
+### Route POST pour s'inscrire, qui recoit => pseudo, password, passwordConfirm, firstname, lastname, emailAddress (pour coller avec le back, le nom des variables doit être identique)
+
+##### Certaines contraintes sont présente sur ces données => certaines données doivent être unique dans la BDD : emailAdress, pseudo // emailAddress doit avoir un format correct d'email // password doit être identique a passwordConfirm // password doit avoir un nombre minimum de 8 charactéres, une lettre majuscule, une lettre minuscule, un caractére spécial parmis : !@#$%^&*
+
+POST {{baseUrl}}/inscription
+Content-Type: application/json
+
+{"firstName":"Arthur", "lastName": "Rimbaud","pseudo":"king_kong","emailAddress":"arthur@gmail.fr","password":"Effe0EegfDFGG!", "passwordConfirm":"Effe0EegfDFGG!" }
+
+###
+
+POST {{baseUrl}}/inscription
+Content-Type: application/json
+
+{"firstName":"Daisy_D", "lastName": "Malplacé","pseudo":"Daisy","emailAddress":"tonton@gmail.fr","password":"123!!AAaa", "passwordConfirm":"123!!AAaa" }
+
+###  Ne devrait pas marcher a cause d'un mot de passe inf a 8 caractéres
+POST {{baseUrl}}/inscription
+Content-Type: application/json
+
+{"firstName":"tonny", "lastName": "Montana","pseudo":"Tonny","emailAddress":"tony@gmail.fr","password":"!!AAaa1234567", "passwordConfirm":"!!AAaa1234567" }
+
+### Suppression d'un user pour faciliter les essais et supprimer direct derriere un user pour les essais
+
+DELETE {{baseUrl}}/user/98
+
+
+
+### GET obtention de tous les jeux de la BDD
+GET {{baseUrl}}/jeux
+
+### GET obtention de tous les articles de la BDD
+GET {{baseUrl}}/articles
+
+### GET obtention de tous les evenements de la BDD
+
+GET {{baseUrl}}/evenements
+
+### Route GET /evenements/:id
+GET {{baseUrl}}/evenements/2
+
+### Route POST /evenements
+POST {{baseUrl}}/evenements
+Content-Type: application/json
+
+{
+    "title": "test",
+    "description": "Proin augue est, sollicitudin a lectus ac, facilisis tristique nibh. Donec augue nunc, iaculis eu euismod eget, vulputate a sem. Sed ac ullamcorper ipsum. Aenean mi risus, porttitor a convallis a, porttitor quis urna. Proin vulputate nisi a lorem tristique laoreet. Proin rhoncus, ex et malesuada placerat, nulla arcu scelerisque metus, convallis varius risus magna nec mi. Nunc vulputate condimentum libero, et malesuada nunc finibus at. Donec venenatis interdum eleifend.",
+    "creatorId": "1",
+    "eventDate": "2021-04-01 09:00",
+    "tagId": "1",
+    "eventGames": "Les Colons de Catane"
+}
+
+### Route PATCH /evenements/:id
+PATCH {{baseUrl}}/evenements/6
+Content-Type: application/json
+
+{
+    "title": "test 2",
+    "eventGames": "7 Wonders"
+}
+
+

@@ -1,0 +1,15 @@
+%syntax-version=1.0.0
+%project=Guardians_of_the_legend
+
+init 2021-03-02T15:20:50Z Lorène Meslin <lorene.meslin@gmail.com> # création de la table et des domaines nécessaires
+article/views_all_articles 2021-03-03T17:32:20Z Lorène Meslin <lorene.meslin@gmail.com> # création d'une vue permettant de récupérer les articles avec leur auteur et leur tag
+game/views_all_games 2021-03-04T18:54:28Z Lorène Meslin <lorene.meslin@gmail.com> # création d'une vue permettant de récupérer les jeux avec leurs categories et leur type
+event/views_all_events 2021-03-07T18:15:57Z Romain Boudet <romainoclock@gmail.com> # création d'une vue permettant de récupérer les events avec leurs créators et tag
+article/insert 2021-03-08T20:09:28Z Lorène Meslin <lorene.meslin@gmail.com> # création d'une fonction permettant d'insérer un nouvel article
+game/insert 2021-03-08T20:18:53Z Lorène Meslin <lorene.meslin@gmail.com> # création d'une fonction permettant d'insérer un nouveau jeu
+event/insert 2021-03-09T08:07:57Z Lorène Meslin <lorene.meslin@gmail.com> # création d'une fonction permettant d'insérer un nouvel événement
+article/update 2021-03-10T13:02:12Z Lorène Meslin <lorene.meslin@gmail.com> # création d'une fonction permettant de mettre à jour un article
+game/update 2021-03-10T13:23:27Z Lorène Meslin <lorene.meslin@gmail.com> # création d'une fonction permettant de mettre à jour un jeu
+event/update 2021-03-10T13:33:21Z Lorène Meslin <lorene.meslin@gmail.com> # création d'une fonction permettant de mettre à jour un évènement
+email/verify_email 2021-03-13T18:37:18Z Romain Boudet <romainoclock@gmail.com> # Ajout d'une colonne dans la table user pour savoir si l'email a été vérifié ou non
+
