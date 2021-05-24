@@ -93,7 +93,7 @@ const userController = {
   handleLoginForm: async (request, response) => {
     try {
       //on cherche à identifier le user à partir de son pseudo
-      const pseudo = request.body.pseudo;
+      const pseudo = request.sanitize(request.body.pseudo);
       const userInDb = await User.findByPseudo(pseudo);
       console.log('user InDb => ', userInDb);
       //si aucun user trouvé avec ce pseudo => message d'erreur
@@ -208,8 +208,8 @@ const userController = {
     try {
       console.log("request.body =>", request.body);
       //on check si un utilisateur existe déjà avec cet email
-      const email = request.body.emailAddress;
-      const pseudo = request.body.pseudo;
+      const email = request.sanitize(request.body.emailAddress);
+      const pseudo = request.sanitize(request.body.pseudo);
 
       // vérif de sécurité en plus de la REGEX de Joi et de expressSanitizer
       console.log("request.body.emailAddress => ", email);
