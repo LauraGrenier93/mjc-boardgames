@@ -42,7 +42,7 @@ cookie: {
 app.use(cors({ 
   optionsSuccessStatus: 200,//pour transmettre un statue 200 pour d'ancien navigateur
   credentials: true, //permet de transmettre un en-tête
-  origin:  'https://https://club-mjc.surge.sh', // true rend accessible l'api par sécurité il faut mettre notre adresse du front
+  origin:  'https://club-mjc.surge.sh', // true rend accessible l'api par sécurité il faut mettre notre adresse du front
   methods: "GET, PUT, PATCH, POST, DELETE", //configure l'en-têtes pour les méthodes des routes
   allowedHeaders : ['Content-Type', 'Authorization'], // configure l'en-tête pour recevoir un tableau
 })); 
