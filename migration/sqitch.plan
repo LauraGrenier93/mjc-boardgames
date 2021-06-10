@@ -11,5 +11,5 @@ event/insert 2021-03-09T08:07:57Z Lorène Meslin <lorene.meslin@gmail.com> # cr�
 article/update 2021-03-10T13:02:12Z Lorène Meslin <lorene.meslin@gmail.com> # création d'une fonction permettant de mettre à jour un article
 game/update 2021-03-10T13:23:27Z Lorène Meslin <lorene.meslin@gmail.com> # création d'une fonction permettant de mettre à jour un jeu
 event/update 2021-03-10T13:33:21Z Lorène Meslin <lorene.meslin@gmail.com> # création d'une fonction permettant de mettre à jour un évènement
-email/verify_email 2021-03-13T18:37:18Z Romain Boudet <romainoclock@gmail.com> # Ajout d'une colonne dans la table user pour savoir si l'email a été vérifié ou non
+
 

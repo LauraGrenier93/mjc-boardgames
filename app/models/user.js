@@ -197,23 +197,5 @@ class User {
 
     return new User(rows[0]);
   }
-
-
-
-  static async emailverified(id) {
-
-    const {
-      rows
-    } = await db.query('UPDATE "user" SET verifyemail=TRUE WHERE id = $1 RETURNING verifyemail;', [
-      id,
-    ]);
-
-    this.verifyemail = rows[0].verifyemail;
-    console.log(`l'email de l'user id: ${id} a bien été vérifié et passé en statut ${this.verifyemail} !`);
-
-    return new User(rows[0]);
-
-
-  }
 }
 module.exports = User;

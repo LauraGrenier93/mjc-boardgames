@@ -22,7 +22,6 @@ const userSigninSchema = require('./schemas/userSigninSchema');
 const articleSchema = require('./schemas/articleSchema');
 const gameSchema = require('./schemas/gameSchema');
 const eventSchema = require('./schemas/eventSchema');
-const resendEmailLinkSchema = require('./schemas/resendEmailLinkSchema');
 const participantSchema = require('./schemas/participantSchema');
 // Pour la mise en place d'une route sécurisé via la vérification d'un token : 
 // express-jwt et express-jwt-blacklist pour blacklister des tokens.
@@ -205,9 +204,7 @@ router.get('/evenements', eventController.allEvent);
  * @returns {JSON} 200 - Un évenement a été délivré
  */
 router.get('/evenements/:id(\\d+)', eventController.oneEvent);
-// route de vérification de l'email lors de l'inscription
-// Reçois userId et Token en query, vérifis ce qu'il faut et change le statut en BDD de verifyemail dans la table user.
-router.get('/verifyEmail', validateQuery(resendEmailLinkSchema), userController.verifyEmail);
+
 //! Toutes les routes en dessous de ce MW nécéssiteront une autorisation, 
 //! c'est a dire la présence d'un token non révoqué dans leur headers. 
 //! Les routes que l'on veut accessible également aux non inscrits, devront donc être placé au dessus.
