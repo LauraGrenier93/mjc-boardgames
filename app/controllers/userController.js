@@ -201,7 +201,7 @@ const userController = {
 
       // vérif de sécurité en plus de la REGEX de Joi et de expressSanitizer
       console.log("request.body.emailAddress => ", email);
-      //on ne recherche que l'email a un format valide
+      //on vérifie que l'email a un format valide
       if (!validator.validate(email)) {
         //le format de l'email est incorrect
         return response.json('Le format de l\'email est incorrect');

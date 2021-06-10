@@ -10,9 +10,6 @@ class User {
   password;
   inscription;
   avatar;
-  verifyemail;
-  
-
 
   set first_name(val) {
     this.firstName = val;
