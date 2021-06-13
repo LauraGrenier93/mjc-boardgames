@@ -259,7 +259,6 @@ const userController = {
         pseudo: userNowInDb.pseudo,
         firstName: userNowInDb.firstName,
         lastName: userNowInDb.lastName,
-        message: "Merci de valider votre email en cliquant sur le lien envoyé avant de vous connecter."
       });
       console.log(`L'user ${newUser.firstName} ${newUser.lastName} est désormais enregistré dans la BDD sans que sont email soit enregistré. `);
   
