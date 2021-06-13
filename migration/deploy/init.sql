@@ -136,7 +136,7 @@ CREATE TABLE event_has_participant (
 CREATE TABLE event_has_game (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     event_id int NOT NULL REFERENCES "event"(id) ON DELETE CASCADE,
-    game_id int NOT NULL REFERENCES game(id) ON DELETE CASCADE,
+    game_id int NOT NULL REFERENCES game(id) ON DELETE CASCADE
 );
 
 COMMIT;
