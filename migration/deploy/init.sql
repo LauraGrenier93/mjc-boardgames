@@ -56,7 +56,7 @@ CREATE TABLE game (
     editor text NOT NULL,
     "description" text_length NOT NULL,
     "year" posint NOT NULL,
-    "type_id" int NOT NULL REFERENCES game_type(id),
+    "type_id" int NOT NULL REFERENCES game_type(id) ON DELETE CASCADE,
     CHECK (min_player < max_player), -- vérifie que le nombre de joueurs minimum est bien inférieur au nombre de joueurs maximum
     CHECK ("year" > 1100 AND "year" < 2050) -- vérifie que l'année de parution du jeu est bien entre 1100 & 2050
 );
@@ -70,7 +70,7 @@ CREATE TABLE "user" (
     "password" text NOT NULL,
     inscription timestamptz NOT NULL DEFAULT now(),
     avatar text NOT NULL DEFAULT '/var/www/vhosts/lesgardiensdelalegende.fr/beta.lesgardiensdelalegende.fr/images/avatar_default.jpg',
-    group_id int NOT NULL REFERENCES "group"(id) DEFAULT 1
+    group_id int NOT NULL REFERENCES "group"(id) ON DELETE CASCADE DEFAULT 1
 );
 
 CREATE TABLE article (
@@ -79,8 +79,8 @@ CREATE TABLE article (
     "description" text_length NOT NULL,
     created_date timestamptz NOT NULL DEFAULT now(),
     update_date timestamptz,
-    author_id int NOT NULL REFERENCES "user"(id),
-    tag_id int NOT NULL REFERENCES article_tag(id),
+    author_id int NOT NULL REFERENCES "user"(id) ON DELETE CASCADE,
+    tag_id int NOT NULL REFERENCES article_tag(id) ON DELETE CASCADE,
     CHECK (created_date < update_date) -- vérifie que la date de création de l'article est bien inférieur à la date de mise à jour
 );
 
@@ -90,8 +90,8 @@ CREATE TABLE comment (
     "description" text_length NOT NULL,
     created_date timestamptz NOT NULL DEFAULT now(),
     update_date timestamptz,
-    author_id int NOT NULL REFERENCES "user"(id),
-    article_id int NOT NULL REFERENCES article(id),
+    author_id int NOT NULL REFERENCES "user"(id) ON DELETE CASCADE,
+    article_id int NOT NULL REFERENCES article(id) ON DELETE CASCADE,
     CHECK (created_date < update_date)
 );
 
@@ -101,8 +101,8 @@ CREATE TABLE review (
     "description" text_length NOT NULL,
     created_date timestamptz NOT NULL DEFAULT now(),
     update_date timestamptz,
-    author_id int NOT NULL REFERENCES "user"(id),
-    game_id int NOT NULL REFERENCES game(id),
+    author_id int NOT NULL REFERENCES "user"(id) ON DELETE CASCADE,
+    game_id int NOT NULL REFERENCES game(id)  ON DELETE CASCADE,
     CHECK (created_date < update_date)
 );
 
@@ -113,30 +113,30 @@ CREATE TABLE "event" (
     event_date timestamptz NOT NULL,
     created_date timestamptz NOT NULL DEFAULT now(),
     update_date timestamptz,
-    creator_id int NOT NULL REFERENCES "user"(id),
-    tag_id int NOT NULL REFERENCES event_tag(id)
+    creator_id int NOT NULL REFERENCES "user"(id) ON DELETE CASCADE,
+    tag_id int NOT NULL REFERENCES event_tag(id) ON DELETE CASCADE,
     CHECK (created_date < update_date)
 );
 
 CREATE TABLE tag_has_game (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    tag_id int NOT NULL REFERENCES game_tag(id),
-    game_id int NOT NULL REFERENCES game(id)
+    tag_id int NOT NULL REFERENCES game_tag(id) ON DELETE CASCADE,
+    game_id int NOT NULL REFERENCES game(id) ON DELETE CASCADE
 );
 
 CREATE TABLE event_has_participant (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    event_id int NOT NULL REFERENCES "event"(id),
-    "user_id" int NOT NULL REFERENCES "user"(id),
-    inscription_date timestamptz NOT NULL DEFAULT now(),
-    cancelled_date timestamptz,
+    event_id int NOT NULL REFERENCES "event"(id) ON DELETE CASCADE,
+    "user_id" int NOT NULL REFERENCES "user"(id) ON DELETE CASCADE,
+    inscription_date timestamptz NOT NULL DEFAULT now() ON DELETE CASCADE,
+    cancelled_date timestamptz ON DELETE CASCADE,
     CHECK (inscription_date < cancelled_date) -- vérifie que la date d'inscription est bien inférieur à la date d'annulation
 );
 
 CREATE TABLE event_has_game (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    event_id int NOT NULL REFERENCES "event"(id),
-    game_id int NOT NULL REFERENCES game(id)
+    event_id int NOT NULL REFERENCES "event"(id) ON DELETE CASCADE,
+    game_id int NOT NULL REFERENCES game(id) ON DELETE CASCADE,
 );
 
 COMMIT;
