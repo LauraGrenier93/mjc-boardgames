@@ -128,8 +128,8 @@ CREATE TABLE event_has_participant (
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     event_id int NOT NULL REFERENCES "event"(id) ON DELETE CASCADE,
     "user_id" int NOT NULL REFERENCES "user"(id) ON DELETE CASCADE,
-    inscription_date timestamptz NOT NULL DEFAULT now() ON DELETE CASCADE,
-    cancelled_date timestamptz ON DELETE CASCADE,
+    inscription_date timestamptz NOT NULL DEFAULT now(),
+    cancelled_date timestamptz,
     CHECK (inscription_date < cancelled_date) -- vérifie que la date d'inscription est bien inférieur à la date d'annulation
 );
 
