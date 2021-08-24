@@ -1,9 +1,5 @@
 # mjc-back-heroku
 
-![texte alt](conception/image/medieval.jpg)
-
- <img align="left" src="conception/image/logo-noir.png" alt="drawing" width="90"/>  <h1 >Welcome of the repository  of the Guardians of the legend ! </h1>
-
 ## Description
 
 #### This project aims to provide a website for a games club.
